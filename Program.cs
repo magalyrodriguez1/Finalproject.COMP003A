@@ -20,11 +20,7 @@
 
             Console.WriteLine("Enter your birth year.");
             int year = Convert.ToInt32(Console.ReadLine());
-            Birthyear(year);
-
-            
-
-
+            Birthyear(year);         
 
         }
         /*
@@ -48,13 +44,14 @@
             if (year >= 1900 && year <= 2024)
             {
                year = DateTime.Now.Year - year;
+                Console.WriteLine($"You are {year} years old.");
             }
 
             else
             {
-                Console.WriteLine("Invalid birth year.");
+                Console.WriteLine("Invalid birth year. Enter a year between 1900 and 2024.");
             }
-             Console.WriteLine($"{year}");
+             
         }
     }
 }
