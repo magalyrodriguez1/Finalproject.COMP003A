@@ -1,12 +1,14 @@
 ﻿namespace Finalproject.COMP3A
 {
     using System;
+    using System.Buffers;
     using System.Text.RegularExpressions;
 
     internal class Program
     {
         static void Main(string[] args)
         {
+            
             Console.WriteLine("Enter your first name.");
             string name = Console.ReadLine();
             if (Regex.IsMatch(name, @"^[a-zA-Z]+$"))
@@ -31,7 +33,11 @@
                 int year = Convert.ToInt32(Console.ReadLine());
                 Birthyear(year);
 
-            }
+            int i;
+            string[] answer = new string[9]; //9 size array
+
+            Question(answer);
+        }
             /*
             static void Name(string name)
             {
@@ -65,18 +71,22 @@
 
         static void Gender(char gender)
         {
+            gender = char.ToUpper(gender);
             if (gender == 'M') 
             {
-                Console.WriteLine("Male");
+              
+                Console.WriteLine("Male");                
             }
 
             if (gender == 'F')
             {
+                
                 Console.WriteLine("Female");
             }
 
             if (gender == 'O')
             {
+                
                 Console.WriteLine("Other");
             }
             else
@@ -84,8 +94,38 @@
                 Console.WriteLine("Invalid input. Select M, F, or O.");
             }
         }
+
+        static void Question(string[]answer)
+        {
+
+            string[] questions = new string[] { "What is your height in centimeters?", "What is your weight in lbs?", "What is your preferred phone number?",
+            "Please list your health insurance.", "List any medical conditions.", "List any medications you are currently taking.","What is your address?",
+            "Please list one emergency contact.", "Name your current provider.", "State what brings you in today."};
+            
+           foreach (var item in questions)
+            {
+                Console.WriteLine(item);
+            }
+            
+            for(int i = 0; i < 9; i++)
+            {
+                answer[i] = Console.ReadLine();
+            }
+
+
+
+            Console.WriteLine("Questions and answers");
+            foreach (var item in answer)
+            {
+                Console.WriteLine(item);
+            }
+            
+            
+        }
+
+        
         }
     }
 
-
+//maybe create a method that displays full profile? // .GetInfo ?
 
