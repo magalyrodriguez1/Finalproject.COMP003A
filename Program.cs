@@ -33,7 +33,7 @@
                 Console.WriteLine("Invalid input. Enter letters only."); //else statement if incorrect input
             }
              
-            Console.WriteLine($"{lastName}, {name}"); //outputs last name then first name
+            Console.WriteLine($"Your name is {lastName}, {name}"); //outputs last name then first name
 
             SectionSeparator(); //method to separate sections
 
@@ -95,19 +95,19 @@
             if (gender == 'M') 
             {
               
-                Console.WriteLine("Male");                
+                Console.WriteLine("You entered: Male");                
             }
 
             else if(gender == 'F')
             {
                 
-                Console.WriteLine("Female");
+                Console.WriteLine("You entered: Female");
             }
 
             else if(gender == 'O')
             {
                 
-                Console.WriteLine("Other");
+                Console.WriteLine("You entered: Other");
             }
             else
             {
