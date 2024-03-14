@@ -1,25 +1,33 @@
-﻿namespace Finalproject.COMP3A
-{
-    using System;
-    using System.Buffers;
-    using System.Text.RegularExpressions;
+﻿/* author: Magaly Rodriguez
+ * Purpose: Final project - New Patient form - Showcase of our knowledge / skills
+ * Course: COMP 003A
+ */
 
+using System;
+using System.Buffers;
+using System.Net.NetworkInformation;
+using System.Text.RegularExpressions;
+
+namespace Finalproject.COMP3A
+{ 
     internal class Program
     {
         static void Main(string[] args)
         {
-            
+            /*
             Console.WriteLine("Enter your first name.");
-            string name = Console.ReadLine();
-            if (Regex.IsMatch(name, @"^[a-zA-Z]+$")) //detects if input Name uses alphabet
+            string firstName = Console.ReadLine();
+            if (Regex.IsMatch(firstName, @"^[a-zA-Z]+$")) //detects if input Name uses alphabet
             {
-                Console.WriteLine($"Your first name is: {name}");
+                Console.WriteLine($"Your first name is: {firstName}");
             }
 
             else
             {
                 Console.WriteLine("Invalid input. Enter letters only."); //else statement if incorrect input
             }
+            
+            
 
             Console.WriteLine("Enter your last name.");
             string lastName = Console.ReadLine();
@@ -33,8 +41,10 @@
                 Console.WriteLine("Invalid input. Enter letters only."); //else statement if incorrect input
             }
              
-            Console.WriteLine($"Your name is {lastName}, {name}"); //outputs last name then first name
+            Console.WriteLine($"Your name is {lastName}, {firstName}"); //outputs last name then first name
+            */
 
+            patientName();
             SectionSeparator(); //method to separate sections
 
             Console.WriteLine("Enter your gender: M for male, F for female, or O for other only.");
@@ -47,7 +57,7 @@
             int year = Convert.ToInt32(Console.ReadLine());
             Birthyear(year); //calls Birthyear method
                       
-            string[] questions = new string[] //array that holds questions
+            string[] questions = new string[10] //array that holds questions
             {   
                 "What is your height in centimeters?",
                 "What is your weight in lbs?",
@@ -63,7 +73,68 @@
 
             SectionSeparator();
             Question(questions); //calls method to ask for inputs             
-        }          
+        }        
+        
+        static string patientName()
+        {
+            string firstName;
+            string lastName;
+            string regexPattern = @"[^\w\s]"; //a pattern for Regex.IsMatch. it does not allow special characters.
+            do
+            {
+                Console.WriteLine("Enter your first name.");
+                firstName = Console.ReadLine();
+                
+                if (string.IsNullOrEmpty(firstName))
+                {
+                    Console.WriteLine("Invalid input. Enter letters only.");
+                }
+
+                else if (Regex.IsMatch(firstName, ("^[0-9]+$")))
+                {
+                    Console.WriteLine("Invalid input. Enter letters only.");
+                }
+
+                else if (Regex.IsMatch(firstName, regexPattern))
+                {
+                    Console.WriteLine("Invalid input. Enter letters only.");
+                }                
+            }
+
+            while (!Regex.IsMatch(firstName, @"^[a-zA-Z]+$")); //while statement re loops if firstName is not letters. 
+            {
+                Console.WriteLine($"Your first name is: {firstName}");              
+            }
+
+            do
+            {
+                Console.WriteLine("Enter your last name.");
+                lastName = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(lastName))
+                {
+                    Console.WriteLine("Invalid input. Enter letters only.");
+                }
+
+                else if (Regex.IsMatch(lastName, ("^[0-9]+$")))
+                {
+                    Console.WriteLine("Invalid input. Enter letters only.");
+                }
+
+                else if (Regex.IsMatch(lastName, regexPattern))
+                {
+                    Console.WriteLine("Invalid input. Enter letters only.");
+                }
+            }
+
+            while (!Regex.IsMatch(lastName, @"^[a-zA-Z]+$")); //while statement re loops if firstName is not letters. 
+            {
+                Console.WriteLine($"Your last name is: {lastName}");
+            }
+            return firstName;
+            return lastName;
+        }
+
 
         /// <summary>
         /// asks for user input. if input is less than 1900 or over 2024 it will display the else option. Correct input will display the user's age.
@@ -72,7 +143,7 @@
         static void Birthyear(int year)
         {
 
-            if (year >= 1900 && year <= 2024)
+            if (year >= 1900 && year <= DateTime.Now.Year)
             {
                 year = DateTime.Now.Year - year;
                 Console.WriteLine($"You are {year} years old.");
@@ -80,7 +151,7 @@
 
             else
             {
-                Console.WriteLine("Invalid birth year. Enter a year between 1900 and 2024.");
+                Console.WriteLine("Invalid birth year. Enter a year between 1900 and" ,DateTime.Now.Year);
             }
 
         }
@@ -119,16 +190,25 @@
         /// using a foreach loop to display each question followed by user response which is stored in the string Answer. Empty Console.WriteLine to add a 
         /// space between each question and answer.
         /// </summary>
-        /// <param name="answer">string input to answer each question</param>
-        static void Question(string[]answer)
+        /// <param name="questionnaireAnswer">string input to answer each question</param>
+        static void Question(string[]questionnaireAnswer)
         {           
             
-           foreach (var item in answer)
+           foreach (var item in questionnaireAnswer)
             {
                 Console.WriteLine(item);
-                Console.Write("Response: ");
-                string Answer = Console.ReadLine();
-                Console.WriteLine();                              
+                
+                string[] storeAnswer = new string[10];
+                
+                for (int i = 0; i < storeAnswer.Length; i++) //for loop to loop through the array to then store input below.
+                {
+                    storeAnswer[i] = Console.ReadLine(); //stores input into the array storeAnswer                   
+                }
+
+                foreach(string itemAnswer in storeAnswer)
+                {
+                    Console.WriteLine(itemAnswer);
+                }
             }
                       
         }    
